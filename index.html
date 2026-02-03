@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Online Proctoring System</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      background: #f2f4f8;
+      color: #333;
+    }
+
+    header {
+      background: #1e293b;
+      color: #fff;
+      padding: 22px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 28px;
+      margin-bottom: 5px;
+    }
+
+    header p {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      gap: 20px;
+      padding: 30px;
+    }
+
+    .panel {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+    }
+
+    .panel h2 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 8px;
+    }
+
+    /* Exam info */
+    .info ul {
+      list-style: none;
+      font-size: 14px;
+    }
+
+    .info li {
+      margin-bottom: 12px;
+    }
+
+    .status {
+      color: green;
+      font-weight: bold;
+    }
+
+    /* Camera */
+    video {
+      width: 100%;
+      border-radius: 10px;
+      border: 2px solid #0f172a;
+    }
+
+    .note {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #555;
+      text-align: center;
+    }
+
+    /* Alerts */
+    #log {
+      background: #fff3cd;
+      color: #856404;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    footer {
+      background: #1e293b;
+      color: #fff;
+      text-align: center;
+      padding: 12px;
+      font-size: 12px;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Online Proctoring System</h1>
+    <p>Secure and Intelligent Examination Monitoring</p>
+  </header>
+
+  <main class="container">
+
+    <!-- Exam Information -->
+    <section class="panel info">
+      <h2>Exam Information</h2>
+      <ul>
+        <li><strong>Candidate:</strong> Student Name</li>
+        <li><strong>Exam:</strong> Online Assessment</li>
+        <li><strong>Duration:</strong> 60 Minutes</li>
+        <li><strong>Status:</strong> <span class="status">Active</span></li>
+      </ul>
+    </section>
+
+    <!-- Camera Feed -->
+    <section class="panel camera">
+      <h2>Live Camera Monitoring</h2>
+      <video id="video" autoplay muted></video>
+      <p class="note">Camera access is mandatory during the exam</p>
+    </section>
+
+    <!-- Alerts -->
+    <section class="panel alerts">
+      <h2>Proctoring Alerts</h2>
+      <div id="log">Monitoring candidate activity...</div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2026 Online Proctoring System | Academic Project</p>
+  </footer>
+
+  <script>
+    // Camera access
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => {
+        document.getElementById("video").srcObject = stream;
+      })
+      .catch(() => {
+        document.getElementById("log").innerText =
+          "⚠ Camera access denied!";
+      });
+
+    // Tab switch detection
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        document.getElementById("log").innerText =
+          "⚠ Warning: Tab switching detected!";
+      }
+    });
+  </script>
+
+</body>
+</html>
+
