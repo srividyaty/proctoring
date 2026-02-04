@@ -5,3 +5,4 @@ PU college : SHVNM PU college for girls
 Year ; 2022-23
 College : B.E computer Scienece in Sri Krishna Institutte of Technology 
 year : 2026-27
+with cgpa 8.6
